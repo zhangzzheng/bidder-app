@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bidder-app
+    env: node
+    buildCommand: npm install
+    startCommand: node start.js
+    envVars:
+      - key: PORT
+        value: 3456
+      - key: NODE_VERSION
+        value: 20
