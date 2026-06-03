@@ -1,0 +1,331 @@
+{
+  "projects": [
+    {
+      "id": 14,
+      "name": "弋阳至南丰高速公路新建工程与鹰厦铁路、昌福铁路交叉工程施工总价承包",
+      "qaDate": "2026-05-26",
+      "bidDeadline": "2026-06-11",
+      "projectInfo": "①高速公路采用2×70m转体T构上跨鹰厦铁路，桥长808m；②高速公路采用下穿桥形式与昌福铁路相交，左幅桥梁全长250m，右幅桥梁全长250m。",
+      "projectLocation": "江西省抚州市",
+      "projectType": "公路",
+      "projectCost": "14309.797639万元",
+      "status": "active",
+      "createdAt": "2026-06-03T06:13:04.881Z",
+      "updatedAt": "2026-06-03T06:13:40.360Z",
+      "scorePoints": [
+        {
+          "id": "sp_1780467184884_q85s",
+          "name": "内容完整性",
+          "maxScore": 1,
+          "criteria": "内容完整，符合招标文件要求，否则酌情扣分",
+          "chapterTitle": "内容完整性",
+          "sortOrder": 0,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184886_4wkm",
+          "name": "编制依据、编制范围",
+          "maxScore": 1,
+          "criteria": "编制依据充分，依据文件或规定适合；编制范围与招标范围一致",
+          "chapterTitle": "编制依据、编制范围",
+          "sortOrder": 1,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184887_m0fe",
+          "name": "工程概况",
+          "maxScore": 1,
+          "criteria": "工程概况、主要技术标准、主要工程内容、工程特点、控制工程及重难点工程描述准确恰当",
+          "chapterTitle": "工程概况",
+          "sortOrder": 2,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184888_wydg",
+          "name": "建设项目所在地区特征",
+          "maxScore": 2,
+          "criteria": "自然特征、周边环境、既有铁路等概况叙述全面准确",
+          "chapterTitle": "建设项目所在地区特征",
+          "sortOrder": 3,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184888_n36o",
+          "name": "施工组织安排",
+          "maxScore": 15,
+          "criteria": "施工总体目标满足要求；组织机构、队伍部署和区段划分合理；总体施工安排针对性强；分项工程进度计划合理；施工准备和协调方案合理；接口工程方案合理",
+          "chapterTitle": "施工组织安排",
+          "sortOrder": 4,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184889_b19l",
+          "name": "临时工程和过渡工程方案",
+          "maxScore": 10,
+          "criteria": "临时工程布局符合要求；实施方案可行且有平面布置图；过渡工程方案符合设计要求",
+          "chapterTitle": "临时工程和过渡工程方案",
+          "sortOrder": 5,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184889_g77d",
+          "name": "控制工程和重难点工程（包括高风险工程）施工方案",
+          "maxScore": 15,
+          "criteria": "提供危大工程清单并明确安全管理措施；下穿昌福铁路桥梁营业线施工方案合理可行；上跨鹰厦铁路转体桥梁营业线施工方案合理可行",
+          "chapterTitle": "控制工程和重难点工程（包括高风险工程）施工方案",
+          "sortOrder": 6,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184890_abg2",
+          "name": "施工方案",
+          "maxScore": 20,
+          "criteria": "各专业施工方案全面；施工准备方案合理可行；各专业工程施工组织衔接合理可行",
+          "chapterTitle": "施工方案",
+          "sortOrder": 7,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184890_llxj",
+          "name": "资源配置方案",
+          "maxScore": 10,
+          "criteria": "劳动力配置计划合理；有劳动力计划图；材料设备供应计划合理；施工设备配备合理；测量试验设备配备合理；工程用款计划合理；电力需求计划合理；临时用地计划合理",
+          "chapterTitle": "资源配置方案",
+          "sortOrder": 8,
+          "category": "施工组织设计"
+        },
+        {
+          "id": "sp_1780467184890_mct9",
+          "name": "管理措施",
+          "maxScore": 25,
+          "criteria": "标准化管理措施合理可行；质量管理措施合理可行；安全保证措施合理可行；工期控制措施合理可行；信息化管理措施合理可行；投资控制措施合理可行；环境保护、水土保持、文物保护、文明施工、冬季施工、雨季施工、夏季高温施工措施合理可行；突发事件应急预案合理可行；农民工工资保障措施合理可行；医疗卫生及职业健康保障措施合理可行",
+          "chapterTitle": "管理措施",
+          "sortOrder": 9,
+          "category": "施工组织设计"
+        }
+      ],
+      "milestones": [
+        {
+          "id": 37,
+          "projectId": 14,
+          "type": "qa",
+          "title": "招标答疑",
+          "startDate": "2026-05-26",
+          "endDate": "2026-05-26",
+          "status": "in_progress",
+          "note": "",
+          "sortOrder": 0,
+          "createdAt": "2026-06-03T06:13:04.907Z"
+        },
+        {
+          "id": 38,
+          "projectId": 14,
+          "type": "drafting",
+          "title": "技术标编制",
+          "startDate": "2026-05-29",
+          "endDate": "2026-05-31",
+          "status": "pending",
+          "note": "",
+          "sortOrder": 1,
+          "createdAt": "2026-06-03T06:13:04.908Z"
+        },
+        {
+          "id": 39,
+          "projectId": 14,
+          "type": "first_review",
+          "title": "内部评审",
+          "startDate": "2026-06-02",
+          "endDate": "2026-06-04",
+          "status": "pending",
+          "note": "",
+          "sortOrder": 2,
+          "createdAt": "2026-06-03T06:13:04.909Z"
+        },
+        {
+          "id": 40,
+          "projectId": 14,
+          "type": "review",
+          "title": "初步审核",
+          "startDate": "2026-06-04",
+          "endDate": "2026-06-06",
+          "status": "pending",
+          "note": "",
+          "sortOrder": 3,
+          "createdAt": "2026-06-03T06:13:04.910Z"
+        },
+        {
+          "id": 41,
+          "projectId": 14,
+          "type": "final_review",
+          "title": "终审定稿",
+          "startDate": "2026-06-07",
+          "endDate": "2026-06-09",
+          "status": "pending",
+          "note": "",
+          "sortOrder": 4,
+          "createdAt": "2026-06-03T06:13:04.911Z"
+        },
+        {
+          "id": 42,
+          "projectId": 14,
+          "type": "submission",
+          "title": "递交标书",
+          "startDate": "2026-06-09",
+          "endDate": "2026-06-11",
+          "status": "pending",
+          "note": "",
+          "sortOrder": 5,
+          "createdAt": "2026-06-03T06:13:04.912Z"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 101,
+          "projectId": 14,
+          "title": "内容完整性",
+          "scorePointId": "sp_1780467184884_q85s",
+          "chapterTitle": "内容完整性",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 0,
+          "createdAt": "2026-06-03T06:13:04.897Z"
+        },
+        {
+          "id": 102,
+          "projectId": 14,
+          "title": "编制依据、编制范围",
+          "scorePointId": "sp_1780467184886_4wkm",
+          "chapterTitle": "编制依据、编制范围",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 1,
+          "createdAt": "2026-06-03T06:13:04.899Z"
+        },
+        {
+          "id": 103,
+          "projectId": 14,
+          "title": "工程概况",
+          "scorePointId": "sp_1780467184887_m0fe",
+          "chapterTitle": "工程概况",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 2,
+          "createdAt": "2026-06-03T06:13:04.900Z"
+        },
+        {
+          "id": 104,
+          "projectId": 14,
+          "title": "建设项目所在地区特征",
+          "scorePointId": "sp_1780467184888_wydg",
+          "chapterTitle": "建设项目所在地区特征",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 3,
+          "createdAt": "2026-06-03T06:13:04.901Z"
+        },
+        {
+          "id": 105,
+          "projectId": 14,
+          "title": "施工组织安排",
+          "scorePointId": "sp_1780467184888_n36o",
+          "chapterTitle": "施工组织安排",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 4,
+          "createdAt": "2026-06-03T06:13:04.902Z"
+        },
+        {
+          "id": 106,
+          "projectId": 14,
+          "title": "临时工程和过渡工程方案",
+          "scorePointId": "sp_1780467184889_b19l",
+          "chapterTitle": "临时工程和过渡工程方案",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 5,
+          "createdAt": "2026-06-03T06:13:04.903Z"
+        },
+        {
+          "id": 107,
+          "projectId": 14,
+          "title": "控制工程和重难点工程（包括高风险工程）施工方案",
+          "scorePointId": "sp_1780467184889_g77d",
+          "chapterTitle": "控制工程和重难点工程（包括高风险工程）施工方案",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 6,
+          "createdAt": "2026-06-03T06:13:04.903Z"
+        },
+        {
+          "id": 108,
+          "projectId": 14,
+          "title": "施工方案",
+          "scorePointId": "sp_1780467184890_abg2",
+          "chapterTitle": "施工方案",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 7,
+          "createdAt": "2026-06-03T06:13:04.904Z"
+        },
+        {
+          "id": 109,
+          "projectId": 14,
+          "title": "资源配置方案",
+          "scorePointId": "sp_1780467184890_llxj",
+          "chapterTitle": "资源配置方案",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 8,
+          "createdAt": "2026-06-03T06:13:04.904Z"
+        },
+        {
+          "id": 110,
+          "projectId": 14,
+          "title": "管理措施",
+          "scorePointId": "sp_1780467184890_mct9",
+          "chapterTitle": "管理措施",
+          "assignee": "",
+          "status": "pending",
+          "priority": "medium",
+          "deadline": "",
+          "note": "",
+          "sortOrder": 9,
+          "createdAt": "2026-06-03T06:13:04.905Z"
+        }
+      ],
+      "members": []
+    }
+  ],
+  "members": [],
+  "nextProjectId": 15,
+  "nextTaskId": 115,
+  "nextMilestoneId": 43,
+  "nextMemberId": 1
+}

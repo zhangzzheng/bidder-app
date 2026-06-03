@@ -7,14 +7,16 @@ const store = require('./db/store');
 
 const app = express();
 const PORT = process.env.PORT || 3456;
+const IS_VERCEL = !!process.env.VERCEL;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const UPLOAD_DIR = IS_VERCEL ? '/tmp/uploads' : path.join(__dirname, 'uploads');
+const upload = multer({ dest: UPLOAD_DIR });
 
 // ── AI 模型配置 ──
-const AI_CONFIG_PATH = path.join(__dirname, 'ai_config.json');
+const AI_CONFIG_PATH = IS_VERCEL ? '/tmp/ai_config.json' : path.join(__dirname, 'ai_config.json');
 function getAiConfig() {
   try {
     if (fs.existsSync(AI_CONFIG_PATH)) {
@@ -42,146 +44,148 @@ app.put('/api/ai-config', (req, res) => {
   res.json({ ok: true });
 });
 
+// Async handler wrapper
+const ah = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+
 // ── 项目 ──
-app.get('/api/projects', (req, res) => res.json(store.listProjects()));
+app.get('/api/projects', ah(async (req, res) => res.json(await store.listProjects())));
 
-app.get('/api/projects/:id', (req, res) => {
-  const p = store.getProject(Number(req.params.id));
+app.get('/api/projects/:id', ah(async (req, res) => {
+  const p = await store.getProject(Number(req.params.id));
   if (!p) return res.status(404).json({ error: '项目不存在' });
   res.json(p);
-});
+}));
 
-app.post('/api/projects', (req, res) => {
-  const p = store.createProject(req.body);
+app.post('/api/projects', ah(async (req, res) => {
+  const p = await store.createProject(req.body);
   res.status(201).json(p);
-});
+}));
 
-app.put('/api/projects/:id', (req, res) => {
-  const p = store.updateProject(Number(req.params.id), req.body);
+app.put('/api/projects/:id', ah(async (req, res) => {
+  const p = await store.updateProject(Number(req.params.id), req.body);
   if (!p) return res.status(404).json({ error: '项目不存在' });
   res.json(p);
-});
+}));
 
-app.delete('/api/projects/:id', (req, res) => {
-  store.deleteProject(Number(req.params.id));
+app.delete('/api/projects/:id', ah(async (req, res) => {
+  await store.deleteProject(Number(req.params.id));
   res.json({ ok: true });
-});
+}));
 
 // ── 评分点 ──
-app.post('/api/projects/:id/score-points', (req, res) => {
-  const sp = store.addScorePoint(Number(req.params.id), req.body);
+app.post('/api/projects/:id/score-points', ah(async (req, res) => {
+  const sp = await store.addScorePoint(Number(req.params.id), req.body);
   if (!sp) return res.status(404).json({ error: '项目不存在' });
   res.status(201).json(sp);
-});
+}));
 
-app.put('/api/projects/:pid/score-points/:spId', (req, res) => {
-  const sp = store.updateScorePoint(Number(req.params.pid), req.params.spId, req.body);
+app.put('/api/projects/:pid/score-points/:spId', ah(async (req, res) => {
+  const sp = await store.updateScorePoint(Number(req.params.pid), req.params.spId, req.body);
   if (!sp) return res.status(404).json({ error: '评分点不存在' });
   res.json(sp);
-});
+}));
 
-app.delete('/api/projects/:pid/score-points/:spId', (req, res) => {
-  store.deleteScorePoint(Number(req.params.pid), req.params.spId);
+app.delete('/api/projects/:pid/score-points/:spId', ah(async (req, res) => {
+  await store.deleteScorePoint(Number(req.params.pid), req.params.spId);
   res.json({ ok: true });
-});
+}));
 
 // ── 任务 ──
-app.get('/api/projects/:id/tasks', (req, res) => {
-  const p = store.getProject(Number(req.params.id));
+app.get('/api/projects/:id/tasks', ah(async (req, res) => {
+  const p = await store.getProject(Number(req.params.id));
   if (!p) return res.status(404).json({ error: '项目不存在' });
   res.json(p.tasks);
-});
+}));
 
-app.post('/api/projects/:id/tasks', (req, res) => {
-  const t = store.addTask(Number(req.params.id), req.body);
+app.post('/api/projects/:id/tasks', ah(async (req, res) => {
+  const t = await store.addTask(Number(req.params.id), req.body);
   if (!t) return res.status(404).json({ error: '项目不存在' });
   res.status(201).json(t);
-});
+}));
 
-app.put('/api/projects/:pid/tasks/:taskId', (req, res) => {
-  const t = store.updateTask(Number(req.params.pid), Number(req.params.taskId), req.body);
+app.put('/api/projects/:pid/tasks/:taskId', ah(async (req, res) => {
+  const t = await store.updateTask(Number(req.params.pid), Number(req.params.taskId), req.body);
   if (!t) return res.status(404).json({ error: '任务不存在' });
   res.json(t);
-});
+}));
 
-app.delete('/api/projects/:pid/tasks/:taskId', (req, res) => {
-  store.deleteTask(Number(req.params.pid), Number(req.params.taskId));
+app.delete('/api/projects/:pid/tasks/:taskId', ah(async (req, res) => {
+  await store.deleteTask(Number(req.params.pid), Number(req.params.taskId));
   res.json({ ok: true });
-});
+}));
 
-app.post('/api/projects/:id/tasks/batch-from-score-points', (req, res) => {
-  const tasks = store.batchCreateTasksFromScorePoints(Number(req.params.id));
+app.post('/api/projects/:id/tasks/batch-from-score-points', ah(async (req, res) => {
+  const tasks = await store.batchCreateTasksFromScorePoints(Number(req.params.id));
   if (!tasks) return res.status(404).json({ error: '项目不存在' });
   res.status(201).json(tasks);
-});
+}));
 
 // ── 里程碑 ──
-app.get('/api/projects/:id/milestones', (req, res) => {
-  const p = store.getProject(Number(req.params.id));
+app.get('/api/projects/:id/milestones', ah(async (req, res) => {
+  const p = await store.getProject(Number(req.params.id));
   if (!p) return res.status(404).json({ error: '项目不存在' });
   res.json(p.milestones);
-});
+}));
 
-app.post('/api/projects/:id/milestones', (req, res) => {
-  const m = store.addMilestone(Number(req.params.id), req.body);
+app.post('/api/projects/:id/milestones', ah(async (req, res) => {
+  const m = await store.addMilestone(Number(req.params.id), req.body);
   if (!m) return res.status(404).json({ error: '项目不存在' });
   res.status(201).json(m);
-});
+}));
 
-app.put('/api/projects/:pid/milestones/:msId', (req, res) => {
-  const m = store.updateMilestone(Number(req.params.pid), Number(req.params.msId), req.body);
+app.put('/api/projects/:pid/milestones/:msId', ah(async (req, res) => {
+  const m = await store.updateMilestone(Number(req.params.pid), Number(req.params.msId), req.body);
   if (!m) return res.status(404).json({ error: '里程碑不存在' });
   res.json(m);
-});
+}));
 
-app.delete('/api/projects/:pid/milestones/:msId', (req, res) => {
-  store.deleteMilestone(Number(req.params.pid), Number(req.params.msId));
+app.delete('/api/projects/:pid/milestones/:msId', ah(async (req, res) => {
+  await store.deleteMilestone(Number(req.params.pid), Number(req.params.msId));
   res.json({ ok: true });
-});
+}));
 
-app.post('/api/projects/:id/generate-milestones', (req, res) => {
-  const ms = store.generateMilestones(Number(req.params.id));
+app.post('/api/projects/:id/generate-milestones', ah(async (req, res) => {
+  const ms = await store.generateMilestones(Number(req.params.id));
   if (!ms) return res.status(400).json({ error: '请先设置答疑时间和截标时间' });
   res.status(201).json(ms);
-});
+}));
 
 // ── 成员 ──
-app.get('/api/members', (req, res) => res.json(store.listMembers()));
-app.post('/api/members', (req, res) => { const m = store.addMember(req.body); res.status(201).json(m); });
-app.put('/api/members/:id', (req, res) => {
-  const m = store.updateMember(Number(req.params.id), req.body);
+app.get('/api/members', ah(async (req, res) => res.json(await store.listMembers())));
+app.post('/api/members', ah(async (req, res) => { const m = await store.addMember(req.body); res.status(201).json(m); }));
+app.put('/api/members/:id', ah(async (req, res) => {
+  const m = await store.updateMember(Number(req.params.id), req.body);
   if (!m) return res.status(404).json({ error: '成员不存在' });
   res.json(m);
-});
-app.delete('/api/members/:id', (req, res) => { store.deleteMember(Number(req.params.id)); res.json({ ok: true }); });
+}));
+app.delete('/api/members/:id', ah(async (req, res) => { await store.deleteMember(Number(req.params.id)); res.json({ ok: true }); }));
 // ── 项目成员 ──
-app.get('/api/projects/:id/members', (req, res) => {
-  const p = store.getProject(Number(req.params.id));
+app.get('/api/projects/:id/members', ah(async (req, res) => {
+  const p = await store.getProject(Number(req.params.id));
   if (!p) return res.status(404).json({ error: '项目不存在' });
   res.json(p.members || []);
-});
-app.post('/api/projects/:id/members', (req, res) => {
-  const m = store.addProjectMember(Number(req.params.id), req.body);
+}));
+app.post('/api/projects/:id/members', ah(async (req, res) => {
+  const m = await store.addProjectMember(Number(req.params.id), req.body);
   if (!m) return res.status(404).json({ error: '项目不存在' });
   res.status(201).json(m);
-});
-app.delete('/api/projects/:pid/members/:mid', (req, res) => {
-  store.removeProjectMember(Number(req.params.pid), req.params.mid);
+}));
+app.delete('/api/projects/:pid/members/:mid', ah(async (req, res) => {
+  await store.removeProjectMember(Number(req.params.pid), req.params.mid);
   res.json({ ok: true });
-});
-
+}));
 
 // ── Dashboard & Announcement ──
-app.get('/api/projects/:id/dashboard', (req, res) => {
-  const d = store.getDashboard(Number(req.params.id));
+app.get('/api/projects/:id/dashboard', ah(async (req, res) => {
+  const d = await store.getDashboard(Number(req.params.id));
   if (!d) return res.status(404).json({ error: '项目不存在' });
   res.json(d);
-});
-app.get('/api/projects/:id/announcement', (req, res) => {
-  const a = store.getAnnouncement(Number(req.params.id));
+}));
+app.get('/api/projects/:id/announcement', ah(async (req, res) => {
+  const a = await store.getAnnouncement(Number(req.params.id));
   if (!a) return res.status(404).json({ error: '项目不存在' });
   res.json(a);
-});
+}));
 
 // ═══════════════════════════════════════════════════════════════════
 //  核心: 上传标书 → PDF解析 → AI提取 → 自动创建项目
@@ -221,7 +225,7 @@ app.post('/api/upload-and-create', upload.single('file'), async (req, res) => {
     }
 
     // 创建项目
-    const project = store.createProject({
+    const project = await store.createProject({
       name: extracted.name,
       projectLocation: extracted.location,
       projectType: extracted.type,
@@ -254,7 +258,7 @@ app.post('/api/upload-and-create', upload.single('file'), async (req, res) => {
     }
     const spIds = [];
     for (const item of scoreItems) {
-      const sp = store.addScorePoint(project.id, {
+      const sp = await store.addScorePoint(project.id, {
         name: item.name,
         maxScore: item.maxScore,
         criteria: item.criteria,
@@ -267,7 +271,7 @@ app.post('/api/upload-and-create', upload.single('file'), async (req, res) => {
     // 从评分点生成章节任务
     for (let i = 0; i < scoreItems.length; i++) {
       const item = scoreItems[i];
-      store.addTask(project.id, {
+      await store.addTask(project.id, {
         title: item.name,
         scorePointId: spIds[i] || null,
         chapterTitle: item.name,
@@ -277,9 +281,9 @@ app.post('/api/upload-and-create', upload.single('file'), async (req, res) => {
     }
 
     // 自动生成里程碑
-    store.generateMilestones(project.id);
+    await store.generateMilestones(project.id);
 
-    res.json(store.getProject(project.id));
+    res.json(await store.getProject(project.id));
 
   } catch (e) {
     console.error('解析失败:', e);
@@ -524,6 +528,10 @@ function basicExtract(text, filename) {
 }
 
 // ── 启动 ──
-app.listen(PORT, () => {
-  console.log(`投标管理工具已启动: http://localhost:${PORT}`);
-});
+if (!IS_VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`投标管理工具已启动: http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

@@ -1,5 +1,9 @@
 node_modules/
 uploads/
 .env
-data.json
 *.log
+
+# Temp files
+*.zip
+fix_*.js
+update_frontend.js
